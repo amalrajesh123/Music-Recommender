@@ -38,3 +38,18 @@ def suggestsong(mood):
 
 while True:
     usermood = input("Enter your mood (romantic, party, sleep, trending, etc.), or press 0 to pause: ").lower()
+    if not usermood.strip():
+        break
+
+    result = suggestsong(usermood)
+    print("Recommended song:", result)
+    pygame.mixer.init()
+    pygame.mixer.music.load(result)
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        if input("Press 0 to stop the music (or press 0 to change mood): ").strip():
+            pygame.mixer.music.stop()
+            break
+pygame.quit()
+
